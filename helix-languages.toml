@@ -1,0 +1,11 @@
+[[language]]
+name = "tsx"
+language-servers = [ "eslint", "emmet-ls", "typescript-language-server", "tailwindcss-ls" ]
+formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = [ "eslint", "emmet-ls", "typescript-language-server", "tailwindcss-ls" ]
+formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+auto-format = true
