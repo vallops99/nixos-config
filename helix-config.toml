@@ -1,2 +1,4 @@
 theme = "onedarker"
 
+[editor.file-picker]
+hidden = false

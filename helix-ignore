@@ -1,0 +1,6 @@
+.direnv
+.git
+.github
+.husky
+.next
+node_modules
