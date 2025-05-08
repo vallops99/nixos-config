@@ -1,0 +1,78 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "g d",
+        "command": "editor.action.revealDefinition",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    // Go to references
+    {
+        "key": "g r",
+        "command": "editor.action.goToReferences",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    // Go to implementation
+    {
+        "key": "g i",
+        "command": "editor.action.goToImplementation",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    // Go to start of line
+    {
+        "key": "g h",
+        "command": "cursorHome",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    // Go to end of line
+    {
+        "key": "g l",
+        "command": "cursorEnd",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    // Go to end of file
+    {
+        "key": "g e",
+        "command": "cursorBottom",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    // Trigger VS Code find with /
+    {
+        "key": "/",
+        "command": "actions.find",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    // Search globally
+    {
+        "key": "space /",
+        "command": "workbench.action.findInFiles",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    // Search file
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen",
+        "when": "editorTextFocus"
+    },
+    // Select entire line
+    {
+        "key": "shift+x",
+        "command": "expandLineSelection",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+   },
+   {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorTextFocus"
+    },
+    // Split editor right with same file
+    {
+        "key": "space+w v",
+        "command": "workbench.action.splitEditorRight",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    },
+    {
+        "key": "d",
+        "command": "deleteRight",
+        "when": "editorTextFocus && (vim.mode == 'Normal' || vim.mode == 'Visual')"
+    }
+]
