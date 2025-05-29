@@ -12,6 +12,7 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 2;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -59,6 +60,12 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Add Nvidia video drivers
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.graphics.enable = true;
+  hardware.nvidia.open = false;
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -81,11 +88,8 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.vallops = {
     isNormalUser = true;
-    description = "Valerio  Farrotti";
+    description = "Valerio Farrotti";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
   };
 
   # Enable docker
@@ -108,19 +112,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    htop
-    bitwarden-desktop
-    brave
-    git
-    joplin
-    vesktop
-    helix
-    mermaid-cli
-    ghostty
-    ripgrep
-    slack
-  ];
+  environment.systemPackages = [];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -149,5 +141,10 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 }
