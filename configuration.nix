@@ -5,10 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -16,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -52,10 +52,9 @@
   services.xserver = {
     xkb = {
       variant = "";
-      layout = "us"; 
+      layout = "us";
     };
   };
-
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -67,7 +66,7 @@
   hardware.nvidia.open = false;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -86,10 +85,27 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = false;
+  users.users.vallops-root = {
+    isSystemUser = true;
+    description = "Root user";
+    initialPassword = "!";
+    group = "root";
+    packages = [
+      pkgs.gparted
+      pkgs.firefox
+    ];
+  };
+
   users.users.vallops = {
     isNormalUser = true;
     description = "Valerio Farrotti";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
+    initialPassword = "!";
   };
 
   # Enable docker
@@ -112,7 +128,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = [];
+  environment.systemPackages = [ ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -141,7 +157,10 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.gc = {
     automatic = true;
     dates = "weekly";

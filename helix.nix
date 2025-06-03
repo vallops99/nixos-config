@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 
 {
   programs.helix = {
@@ -16,7 +16,7 @@
         {
           name = "nix";
           auto-format = true;
-          formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+          formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
         }
         {
           name = "tsx";
@@ -51,7 +51,7 @@
             ];
           };
           auto-format = true;
-    
+
         }
         {
           name = "python";
@@ -83,14 +83,14 @@
             "ipynb"
           ];
           comment-token = "#";
-          shebangs = ["python"];
+          shebangs = [ "python" ];
           auto-format = true;
         }
       ];
 
       language-server.pyright = {
         command = "pyright-langserver";
-        args = ["--stdio"];
+        args = [ "--stdio" ];
         pyright.config.python.analysis = {
           typeCheckingMode = "basic";
           autoImportCompletions = true;

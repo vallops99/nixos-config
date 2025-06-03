@@ -1,8 +1,13 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   home.username = "vallops";
-  home.homeDirectory = "/home/vallops";
+  home.homeDirectory = lib.mkForce "/home/vallops";
 
   # link all files in `./scripts` to `~/.config/i3/scripts`
   # home.file.".config/i3/scripts" = {
@@ -16,7 +21,7 @@
   #     xxx
   # '';
 
-  imports = [ ./helix.nix  ];
+  imports = [ ./helix.nix ];
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
@@ -33,7 +38,7 @@
     # productivity
     glow # markdown previewer in terminal
 
-    zenith  # replacement of htop/nmon
+    zenith # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
