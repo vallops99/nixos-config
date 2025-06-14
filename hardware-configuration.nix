@@ -29,7 +29,7 @@
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
-    fsType = "btrfs";
+    fsType = "btrfs"; # WARNING: This filesystem type is NOT good for desktop pc (use ext4)
     options = [
       "nofail"
     ];
