@@ -51,7 +51,6 @@
             ];
           };
           auto-format = true;
-
         }
         {
           name = "python";
@@ -86,6 +85,14 @@
           shebangs = [ "python" ];
           auto-format = true;
         }
+        {
+          name = "rust";
+          language-servers = [
+            {
+              name = "rust-analyzer";
+            }
+          ];
+        }
       ];
 
       language-server.pyright = {
@@ -108,6 +115,14 @@
         };
         ruff.config.settings.format = {
           preview = true;
+        };
+      };
+      language-server.rust-analyzer.config = {
+        check = {
+          command = "clippy";
+        };
+        cargo = {
+          features = "all";
         };
       };
     };
