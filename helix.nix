@@ -9,6 +9,11 @@
         hidden = false;
         git-ignore = true;
       };
+      editor.indent-guides = {
+        render = true;
+        character = "▏"; # Some characters that work well: "▏", "┆", "┊", "⸽"
+        skip-levels = 1;
+      };
     };
 
     languages = {
@@ -92,6 +97,8 @@
               name = "rust-analyzer";
             }
           ];
+        }
+        {
           name = "json";
           formatter = {
             command = "prettier";
