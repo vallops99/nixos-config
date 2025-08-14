@@ -4,7 +4,7 @@
   programs.helix = {
     enable = true;
     settings = {
-      theme = "onedarker";
+      theme = "nightwolf";
       editor.file-picker = {
         hidden = false;
         git-ignore = true;
@@ -19,7 +19,7 @@
           formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
         }
         {
-          name = "tsx";
+          name = "jsx";
           language-servers = [
             "eslint_d"
             "emmet-ls"
@@ -30,7 +30,7 @@
             command = "prettierd";
             args = [
               "--parser"
-              "typescript"
+              "javascript"
             ];
           };
           auto-format = true;
@@ -92,6 +92,14 @@
               name = "rust-analyzer";
             }
           ];
+          name = "json";
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "json"
+            ];
+          };
         }
       ];
 

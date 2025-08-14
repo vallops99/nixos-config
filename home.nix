@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -21,6 +22,11 @@
   #     xxx
   # '';
 
+  home.file = {
+    ".config/helix/themes/nightwolf.toml".text =
+      builtins.readFile "${inputs.self}/nightwolf-helix-theme.toml";
+  };
+
   imports = [ ./helix.nix ];
 
   # Packages that should be installed to the user profile.
@@ -33,14 +39,20 @@
     git
     ripgrep # recursively searches directories for a regex pattern
     jq # A lightweight and flexible command-line JSON processor
+    fd
     joplin-desktop
+    realvnc-vnc-viewer
+    postman
+    git-graph
 
     # productivity
     glow # markdown previewer in terminal
+    zellij
 
     zenith # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
+    ctop # container monitoring
 
     # Nix related
     nixfmt-rfc-style
@@ -60,6 +72,7 @@
     # IDE
     helix
     code-cursor
+    nodePackages.prettier # generic formatter
 
     # Chats
     vesktop
@@ -95,6 +108,10 @@
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
     '';
+    shellAliases = {
+      dcka = "docker container kill $(docker container ls | awk '{print $1}')";
+      dska = "docker stack rm $(docker stack ls | awk '{print $1}')";
+    };
   };
 
   # This value determines the home Manager release that your

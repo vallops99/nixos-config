@@ -16,6 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
+  networking.enableIPv6 = false;
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -85,7 +86,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.mutableUsers = false;
+  users.mutableUsers = true;
   users.users.vallops-root = {
     isSystemUser = true;
     description = "Root user";
@@ -109,13 +110,19 @@
   };
 
   # Enable docker
-  virtualisation.docker.enable = true;
-
-  # use docker without Root access (Rootless docker)
-  virtualisation.docker.rootless = {
+  virtualisation.docker = {
     enable = true;
-    setSocketVariable = true;
+    liveRestore = false;
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+    };
   };
+  # use docker without Root access (Rootless docker)
+  # virtualisation.docker.rootless = {
+  #   enable = true;
+  #   setSocketVariable = true;
+  # };
 
   # Install firefox.
   programs.firefox.enable = true;
