@@ -44,6 +44,8 @@
     realvnc-vnc-viewer
     postman
     git-graph
+    xclip
+    xsel
 
     # productivity
     glow # markdown previewer in terminal
@@ -85,6 +87,7 @@
     bitwarden-desktop
 
     spotify
+    rpi-imager
   ];
 
   # basic configuration of git, please change to your own
@@ -92,6 +95,13 @@
     enable = true;
     userName = "Valerio Farrotti";
     userEmail = "valerio.farrotti@gmail.com";
+    extraConfig = {
+      url = {
+        "ssh://git@bitbucket.org/" = {
+          insteadOf = [ "https://bitbucket.org/" ];
+        };
+      };
+    };
   };
 
   programs.ghostty = {

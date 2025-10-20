@@ -15,6 +15,10 @@
   boot.loader.systemd-boot.configurationLimit = 2;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernel.sysctl."net.ipv6.conf.all.disable_ipv6" = true;
+  boot.kernel.sysctl."net.ipv6.conf.default.disable_ipv6" = true;
+  boot.kernel.sysctl."net.ipv4.ip_forward" = true;
+
   networking.hostName = "nixos"; # Define your hostname.
   networking.enableIPv6 = false;
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
@@ -22,6 +26,9 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.extraHosts = ''
+    127.0.0.1 localhost development.conio.com wallet.development.conio.com appsync.development.conio.com appsync_rewind.development.conio.com dynamodb.development.conio.com kibana.development.conio.com backoffice.development.conio.com log.development.conio.com localstack.development.conio.com vasp-bff.development.conio.com backoffice2.development.conio.com sdk.development.conio.com condex.development.conio.com bitscrooge.development.conio.com core_wallet.development.conio.com condexpro.development.conio.com bitarchiver.development.conio.com vault.development.conio.com cards.development.conio.com
+  '';
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -85,6 +92,18 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Enable avahi in order to discover pc in the local network
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      userServices = true;
+      addresses = true;
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = true;
   users.users.vallops-root = {
@@ -144,11 +163,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
